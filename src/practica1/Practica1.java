@@ -2,6 +2,7 @@
 package practica1;
 import java.util.Random;
 import java.util.Scanner;
+
 /**
  *
  * @author ancer
@@ -19,6 +20,7 @@ public class Practica1 {
     public static boolean debug = false;
     public static int count = 0;
     public static boolean fi = false;
+  
     
 public static void Menu (){
     Scanner sc = new Scanner(System.in);
@@ -29,8 +31,7 @@ public static void Menu (){
         System.out.println("1. Jugar Nivel Principiante");
         System.out.println("2. Jugar Nivel Intermedio");
         System.out.println("3. Jugar Nivel Experto");
-        System.out.println("4. Jugar Modo Debug");
-        System.out.println("5. Salir");
+        System.out.println("4. Salir");
         System.out.println("");
         int opcion = sc.nextInt();
         System.out.println("");
@@ -54,9 +55,6 @@ public static void Menu (){
                 win = (8 * 8) - 12;
                 break;
             case 4:
-                
-                break;
-            case 5:
                 fi = true;
                 System.exit(0);
                 break;
@@ -65,6 +63,54 @@ public static void Menu (){
                 break;
         }      
 }
+      public static void Menu2 (){
+        Scanner sc = new Scanner(System.in);
+       
+        System.out.println("1. Voltear:v");
+        System.out.println("2. Reiniciar:r");
+        System.out.println("3. Mostrar:m");
+        System.out.println("4. Salir:s");
+        System.out.println("");
+        int opcion = sc.nextInt();
+        System.out.println("");
+        switch (opcion) {
+            case 1:
+               introMovim();
+                break;
+            case 2:
+            iniciaTablero();
+            imprTablero(filas, columnas, matriz2);
+            System.out.println("");
+            Menu2();
+            
+            intrMinas();
+            checkMinas();
+            recursivDestapa(mov1, mov2);
+            while (!fipartida) {
+                if (debug) {
+                    imprTablero(filas, columnas, matriz1);
+                    System.out.println("");
+                }
+                imprTablero(filas, columnas, matriz2);
+                System.out.println("");
+                Menu2();
+               
+                recursivDestapa(mov1, mov2);
+            }
+                break;
+            case 3:
+              
+                break;
+            case 4:
+                Menu();
+                break;
+            default:
+                System.out.println("!!!Introduce una opción valida!!!");
+                break;
+        }      
+}
+
+
 
 /**
      * @see imprTablero Imprime el tablero de juego en pantalla
@@ -94,6 +140,7 @@ public static void Menu (){
             System.out.println("");
         }
     }
+    
 
     /**
      * @see randNumero Crea un numero aleatorio para disponer las minas
@@ -195,6 +242,7 @@ public static void Menu (){
             }
         }
     }
+    
 
     /**
      * @see introMovim Introduce el movimiento del jugador en el juego
@@ -202,20 +250,25 @@ public static void Menu (){
     public static void introMovim() {
         Scanner sc = new Scanner(System.in);
         boolean valid = false;
+       
+      
         while (!valid) {
             System.out.println("Introduce tu movimiento!");
-            System.out.print("Introduce la fila ");
+            System.out.println("Introduce la fila ");
             mov1 = sc.nextInt();
-            System.out.print("Introduce la columna ");
+            System.out.println("Introduce la columna ");
             mov2 = sc.nextInt();
-            System.out.println("");
+           
+            
             if ((mov1 < filas && mov2 < columnas) && (mov1 > 0 && mov2 > 0)) {
                 valid = true;
             } else {
                 valid = false;
-            }
+           }
+           
         }
     }
+    
 
     /**
      * @see recursivDestapa Destapa recursivamente las casillas de juego segun
@@ -265,6 +318,8 @@ public static void Menu (){
      * funciones de juego
      * @param args the command line arguments
      */
+    
+    
     public static void main(String[] args) {
         // TODO code application logic here
         while (!fi) {
@@ -274,7 +329,8 @@ public static void Menu (){
             iniciaTablero();
             imprTablero(filas, columnas, matriz2);
             System.out.println("");
-            introMovim();
+            Menu2();
+            
             intrMinas();
             checkMinas();
             recursivDestapa(mov1, mov2);
@@ -285,7 +341,8 @@ public static void Menu (){
                 }
                 imprTablero(filas, columnas, matriz2);
                 System.out.println("");
-                introMovim();
+                Menu2();
+               
                 recursivDestapa(mov1, mov2);
             }
         }
