@@ -20,8 +20,42 @@ public class Practica1 {
     public static boolean debug = false;
     public static int count = 0;
     public static boolean fi = false;
-  
-    
+
+public static void Empezar(){
+     Scanner sc = new Scanner(System.in);
+    System.out.println("Ancer Jose Ruano Ruano");
+    System.out.println("201544295");
+    System.out.println("IPC1 "+"A"+" Practica1");
+    System.out.println("Buscaminas");
+String espacio ="";
+String espacio1 ="";
+espacio = sc.next();
+if (espacio.equals(espacio1)== false){
+    while (!fi) {
+            count = 0;
+            fipartida = false;
+            Menu();
+            iniciaTablero();
+            imprTablero(filas, columnas, matriz2);
+            System.out.println("");
+            Menu2();
+            
+            intrMinas();
+            checkMinas();
+            recursivDestapa(mov1, mov2);
+            while (!fipartida) {
+                if (debug) {
+                    imprTablero(filas, columnas, matriz1);
+                    System.out.println("");
+                }
+                imprTablero(filas, columnas, matriz2);
+                System.out.println("");
+                Menu2();
+                recursivDestapa(mov1, mov2);
+            }
+        }
+    } 
+}
 public static void Menu (){
     Scanner sc = new Scanner(System.in);
         System.out.println("=========================");
@@ -32,7 +66,6 @@ public static void Menu (){
         System.out.println("2. Jugar Nivel Intermedio");
         System.out.println("3. Jugar Nivel Experto");
         System.out.println("4. Salir");
-        System.out.println("");
         int opcion = sc.nextInt();
         System.out.println("");
         switch (opcion) {
@@ -66,11 +99,10 @@ public static void Menu (){
       public static void Menu2 (){
         Scanner sc = new Scanner(System.in);
        
-        System.out.println("1. Voltear:v");
-        System.out.println("2. Reiniciar:r");
-        System.out.println("3. Mostrar:m");
-        System.out.println("4. Salir:s");
-        System.out.println("");
+        System.out.println("1. Voltear");
+        System.out.println("2. Reiniciar");
+        System.out.println("3. Mostrar");
+        System.out.println("4. Salir");
         int opcion = sc.nextInt();
         System.out.println("");
         switch (opcion) {
@@ -78,6 +110,43 @@ public static void Menu (){
                introMovim();
                 break;
             case 2:
+                 while (!fi) {
+            count = 0;
+            fipartida = false;
+            iniciaTablero();
+            imprTablero(filas, columnas, matriz2);
+            System.out.println("");
+            Menu2();
+            intrMinas();
+            checkMinas();
+            recursivDestapa(mov1, mov2);
+            while (!fipartida) {
+                if (debug) {
+                    imprTablero(filas, columnas, matriz1);
+                    System.out.println("");
+                }
+                imprTablero(filas, columnas, matriz2);
+                System.out.println("");
+                Menu2();
+                recursivDestapa(mov1, mov2);
+            }
+                 }
+                break;
+            case 3:
+                 for (int x=0; x < matriz1.length; x++) {
+           System.out.print("|");
+  for (int y=0; y < matriz1[x].length; y++) {
+           System.out.print (matriz1[x][y]);
+    if (y!=matriz1[x].length-1) System.out.print("\t");
+  }
+           System.out.println("|");
+                 }
+                break;
+            case 4:
+                while (!fi) {
+            count = 0;
+            fipartida = false;
+            Menu();
             iniciaTablero();
             imprTablero(filas, columnas, matriz2);
             System.out.println("");
@@ -94,24 +163,15 @@ public static void Menu (){
                 imprTablero(filas, columnas, matriz2);
                 System.out.println("");
                 Menu2();
-               
                 recursivDestapa(mov1, mov2);
             }
-                break;
-            case 3:
-              
-                break;
-            case 4:
-                Menu();
+        }
                 break;
             default:
                 System.out.println("!!!Introduce una opción valida!!!");
                 break;
         }      
 }
-
-
-
 /**
      * @see imprTablero Imprime el tablero de juego en pantalla
      * @param length Tamaño de las filas del tablero
@@ -140,8 +200,6 @@ public static void Menu (){
             System.out.println("");
         }
     }
-    
-
     /**
      * @see randNumero Crea un numero aleatorio para disponer las minas
      * @param sup Limite del rango númerico
@@ -242,8 +300,6 @@ public static void Menu (){
             }
         }
     }
-    
-
     /**
      * @see introMovim Introduce el movimiento del jugador en el juego
      */
@@ -268,8 +324,6 @@ public static void Menu (){
            
         }
     }
-    
-
     /**
      * @see recursivDestapa Destapa recursivamente las casillas de juego segun
      * se reunan las condiciones asi como comprueba si se gana o pierde el juego
@@ -284,8 +338,8 @@ public static void Menu (){
         }
         if (matriz1[casillorg][casill2org] == '*') {
             fipartida = true;
-            System.out.println("BOOM!!");
-            System.out.println("");
+            System.out.println("!!BOOM!!");
+            System.out.println("Has Perdido");
         } else if (matriz1[casilla][casilla2] == '0') {
             if (matriz2[casilla][casilla2] != matriz1[casilla][casilla2]) {
                 matriz2[casilla][casilla2] = matriz1[casilla][casilla2];
@@ -318,14 +372,13 @@ public static void Menu (){
      * funciones de juego
      * @param args the command line arguments
      */
-    
-    
+
     public static void main(String[] args) {
         // TODO code application logic here
         while (!fi) {
             count = 0;
             fipartida = false;
-            Menu();
+            Empezar();
             iniciaTablero();
             imprTablero(filas, columnas, matriz2);
             System.out.println("");
@@ -342,12 +395,8 @@ public static void Menu (){
                 imprTablero(filas, columnas, matriz2);
                 System.out.println("");
                 Menu2();
-               
                 recursivDestapa(mov1, mov2);
             }
         }
-
     }
 }
-    
-    
